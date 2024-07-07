@@ -10,7 +10,6 @@ import io.micronaut.websocket.annotation.OnMessage
 import io.micronaut.websocket.annotation.OnOpen
 import io.micronaut.websocket.annotation.ServerWebSocket
 import jakarta.inject.Singleton
-import kotlinx.coroutines.delay
 
 
 @Suppress("MnUnresolvedPathVariable")
