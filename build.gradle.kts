@@ -1,7 +1,7 @@
 plugins {
     id("org.jetbrains.kotlin.jvm") version "2.0.0"
     id("org.jetbrains.kotlin.plugin.allopen") version "2.0.0"
-    id("com.google.devtools.ksp") version "2.0.0-1.0.21"
+    id("org.jetbrains.kotlin.kapt") version "2.0.0"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("io.micronaut.application") version "4.4.0"
     id("io.micronaut.aot") version "4.4.0"
@@ -10,17 +10,14 @@ plugins {
 version = "0.1"
 group = "de.johannesgaetjen"
 
-val kotlinVersion=project.properties.get("kotlinVersion")
+val kotlinVersion= project.properties["kotlinVersion"]
 repositories {
-    maven("https://s01.oss.sonatype.org/content/repositories/snapshots/") {
-        mavenContent { snapshotsOnly() }
-    }
     mavenCentral()
 }
 
 dependencies {
-    ksp("io.micronaut:micronaut-http-validation")
-    ksp("io.micronaut.serde:micronaut-serde-processor")
+    kapt("io.micronaut:micronaut-inject-java")
+    kapt("io.micronaut.validation:micronaut-validation-processor")
     implementation("io.micronaut:micronaut-websocket")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
