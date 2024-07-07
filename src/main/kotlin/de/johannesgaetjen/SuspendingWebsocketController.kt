@@ -10,12 +10,14 @@ import io.micronaut.websocket.annotation.OnMessage
 import io.micronaut.websocket.annotation.OnOpen
 import io.micronaut.websocket.annotation.ServerWebSocket
 import jakarta.inject.Singleton
+import kotlinx.coroutines.delay
 
 
 @Suppress("MnUnresolvedPathVariable")
 @ServerWebSocket("/suspending/{clientId}")
+@Singleton
 class SuspendingWebsocketController(
-    private val onOpenCounter: BlockingOnOpenCounter
+    private val onOpenCounter: SuspendingOnOpenCounter
 ) {
     @OnOpen
     suspend fun onOpen(
@@ -24,12 +26,12 @@ class SuspendingWebsocketController(
         httpRequest: HttpRequest<*>,
         webSocketSession: WebSocketSession,
     ) {
-        println("onOpen, clientId: $clientId")
+        println("onOpen suspending, clientId: $clientId")
         onOpenCounter.increment()
     }
 
     @OnMessage
-    fun onMessage(
+    suspend fun onMessage(
         @PathVariable("clientId")
         clientId: String,
         message: String,
@@ -40,7 +42,7 @@ class SuspendingWebsocketController(
 
 
     @OnClose
-    fun onClose(
+    suspend fun onClose(
         @PathVariable("clientId")
         clientId: String,
         closeReason: CloseReason,
@@ -49,7 +51,7 @@ class SuspendingWebsocketController(
     }
 
     @OnError
-    fun onError(
+    suspend fun onError(
         @PathVariable("clientId")
         clientId: String,
         throwable: Throwable,

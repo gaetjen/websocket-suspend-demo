@@ -9,7 +9,6 @@ import io.micronaut.websocket.annotation.OnError
 import io.micronaut.websocket.annotation.OnMessage
 import io.micronaut.websocket.annotation.OnOpen
 import io.micronaut.websocket.annotation.ServerWebSocket
-import jakarta.inject.Singleton
 
 
 @Suppress("MnUnresolvedPathVariable")
@@ -24,7 +23,7 @@ class BlockingWebsocketController(
         httpRequest: HttpRequest<*>,
         webSocketSession: WebSocketSession,
     ) {
-        println("onOpen, clientId: $clientId")
+        println("onOpen blocking, clientId: $clientId")
         onOpenCounter.increment()
     }
 
