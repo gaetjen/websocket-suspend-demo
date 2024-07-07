@@ -2,6 +2,7 @@ package de.johannesgaetjen
 
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.annotation.PathVariable
+import io.micronaut.security.annotation.Secured
 import io.micronaut.websocket.CloseReason
 import io.micronaut.websocket.WebSocketSession
 import io.micronaut.websocket.annotation.OnClose
@@ -15,6 +16,7 @@ import jakarta.inject.Singleton
 @Suppress("MnUnresolvedPathVariable")
 @ServerWebSocket("/suspending/{clientId}")
 @Singleton
+@Secured("isAnonymous()")
 class SuspendingWebsocketController(
     private val onOpenCounter: SuspendingOnOpenCounter
 ) {

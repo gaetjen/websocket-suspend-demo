@@ -2,6 +2,7 @@ package de.johannesgaetjen
 
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.annotation.PathVariable
+import io.micronaut.security.annotation.Secured
 import io.micronaut.websocket.CloseReason
 import io.micronaut.websocket.WebSocketSession
 import io.micronaut.websocket.annotation.OnClose
@@ -9,11 +10,11 @@ import io.micronaut.websocket.annotation.OnError
 import io.micronaut.websocket.annotation.OnMessage
 import io.micronaut.websocket.annotation.OnOpen
 import io.micronaut.websocket.annotation.ServerWebSocket
-import jakarta.inject.Singleton
 
 
 @Suppress("MnUnresolvedPathVariable")
 @ServerWebSocket("/blocking/{clientId}")
+@Secured("isAnonymous()")
 class BlockingWebsocketController(
     private val onOpenCounter: BlockingOnOpenCounter
 ) {
