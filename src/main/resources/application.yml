@@ -1,0 +1,6 @@
+micronaut:
+  application:
+    name: websocket-suspend
+  server:
+    thread-selection: auto
+
